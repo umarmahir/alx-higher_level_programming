@@ -1,1 +1,1 @@
-Getting started wih pyhton
+IF ELSE AND LOOPS IN PYTHON
