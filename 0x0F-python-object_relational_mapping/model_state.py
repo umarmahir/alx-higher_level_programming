@@ -1,22 +1,13 @@
 #!/usr/bin/python3
-"""Create table `states` using SQLAlchemy"""
+"""
+This script defines a State class and
+a Base class to work with MySQLAlchemy ORM.
+"""
+import sys
+from model_state import Base, State
 
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (create_engine)
 
-Base = declarative_base()
-
-
-class State(Base):
-    """Class representing the `states` table.
-
-    Columns:
-        id (int): /NOT NULL/AUTO_INCREMENT/PRIMARY_KEY/
-        name (string): /VARCHAR(128)/NOT NULL/
-    """
-    __tablename__ = 'states'
-
-    id = Column(Integer, nullable=False, primary_key=True, autoincrement=True)
-    name = Column(String(128), nullable=False)
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    Base.metadata.create_all(engine)

@@ -1,25 +1,23 @@
 #!/usr/bin/python3
-"""Create table `cities`"""
-
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy import ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+"""
+This script defines a City class
+to work with MySQLAlchemy ORM.
+"""
+from model_state import Base, State
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class City(Base):
-    """Class representing the `cities` table.
-
-    Columns:
-        id (int): /NOT NULL/AUTO_INCREMENT/PRIMARY_KEY/
-        name (str): /VARCHAR(128)/NOT NULL/
-        state_id (int): /NOT NULL/FOREIGN KEY/
+    """City class
+    Attributes:
+        __tablename__ (str): The table name of the class
+        id (int): The id of the class
+        name (str): The name of the class
+        state_id (int): The state the city belongs to
     """
+
     __tablename__ = 'cities'
 
-    id = Column(Integer, nullable=False, primary_key=True, autoincrement=True)
-    name = Column(String(128), nullable=False)
+    id = Column(Integer, primary_key=True)
     state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
+    name = Column(String(128), nullable=False)
